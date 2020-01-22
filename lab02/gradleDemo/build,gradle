@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+plugins {
+    id "application"
+}
+​
+apply plugin: 'java'
+​
+ext {
+   javaMainClass = "gradleDemo.Demo"
+}
+
+application {
+    mainClassName = javaMainClass
+}
