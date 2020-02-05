@@ -1,4 +1,11 @@
-
+buildscript {
+  repositories {
+    flatDir dirs: 'proguard6.2.2/lib'
+  }
+  dependencies {
+    classpath ':proguard'
+  }
+}
 plugins {
     id "application"
 }
@@ -10,4 +17,18 @@ repositories {
  }
  dependencies {
    implementation 'org.apache.commons:commons-csv:1.7'
+ }
+ sourceCompatibility = 1.8
+ version = '1.0'
+ jar {
+   manifest {
+     attributes 'Main-Class': 'gradleDemo.demo',
+           'Implementation-Title': 'Gradle-Demo',
+           'Implementation-Version': version
+   }
+ }
+ task (minify, dependsOn: 'jar', type: proguard.gradle.ProGuardTask) {
+   configuration 'proguard.cfg'
+   injars 'build/libs/gradleDemo-1.0.jar'
+   outjars 'build/libs/Lab03.min.jar'
  }
